@@ -37,16 +37,6 @@ Parallel execution: Break large test suites into shards that run across multiple
 Test impact analysis: Run only the tests relevant to the code changes (e.g., using dependency graphs or tagging).
 With these, pipelines stay lean without sacrificing accuracy.
 
-Example CI/CD Pipeline Design
-Commit Stage (≤10 min) ✔ Linting and static analysis ✔ Unit tests ✔ API contract checks
-
-Integration Stage (≤20 min) ✔ API tests for core business logic ✔ Database validations ✔ Service-to-service contract tests
-
-UI/Acceptance Stage (≤30 min) ✔ Critical E2E flows ✔ Smoke tests across browsers/devices (using BrowserStack or similar infra)
-
-Extended/Regression Stage (Nightly) ✔ Full UI regression suite ✔ Performance, accessibility, security scans
-
-This flow ensures the fastest tests run closest to the developer, while heavier checks run asynchronously but still frequently enough to catch regressions early.
 
 # CONCLUSION
 The goal of testing in CI/CD isn't to run everything instantly — it's to deliver the right feedback at the right time. 
