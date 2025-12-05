@@ -36,11 +36,17 @@ jobs:
         run: npm install
 
         
-      - name: Install dependencies
-        run: npm install --save-dev jest
+      - name: Ensure Jest is executable
+        run: chmod +x ./node_modules/.bin/jest
 
 
       
 
       - name: Run tests
-        run: npx jest --coverage --verbose --detectOpenHandles
+        run: npx test
+        
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v5
+        with:
+          name: coverage-report
+          path: coverage/
