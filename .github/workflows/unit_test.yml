@@ -43,7 +43,7 @@ jobs:
       
 
       - name: Run tests
-        run: npx test
+        run: npm test
         
       - name: Upload coverage report
         uses: actions/upload-artifact@v5
