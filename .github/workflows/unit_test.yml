@@ -52,8 +52,8 @@ jobs:
       - name: Upload unit test report
         uses: actions/upload-artifact@v5
         with:
-          name: unit-test-report
-          path: test-report.html   # make sure this path matches your actual HTML file
+          name: unit-test-report      # The name of the artifact in GitHub Actions
+          path: test-report.html      # Relative path to the file from the repo root
 
       - name: Download unit test report
         uses: actions/download-artifact@v5
