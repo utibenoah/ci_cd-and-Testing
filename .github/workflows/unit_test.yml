@@ -53,7 +53,7 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: unit-test-report
-          path: report/test-report.html   # make sure this path matches your actual HTML file
+          path: test-report.html   # make sure this path matches your actual HTML file
 
       - name: Download unit test report
         uses: actions/download-artifact@v5
