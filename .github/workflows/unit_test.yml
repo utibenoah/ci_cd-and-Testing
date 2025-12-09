@@ -53,8 +53,7 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: unit-test-report
-          path: report/report.html
-
+          path: report/test-report.html   # make sure this path matches your actual HTML file
 
       - name: Download unit test report
         uses: actions/download-artifact@v5
@@ -62,19 +61,16 @@ jobs:
           name: unit-test-report
           path: report-html/
 
-
       - name: List downloaded files
         run: ls -R report-html
 
       - name: Send HTML report to Slack
         run: |
-          curl -F file=@report-html/report.html \
+          curl -F file=@report-html/test-report.html \
                -F "initial_comment=📊 *Unit Test Report*" \
                -F channels=${{ secrets.SLACK_CHANNEL_ID }} \
                -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
                https://slack.com/api/files.upload
-
-
 
      
 
