@@ -54,3 +54,22 @@ jobs:
         with:
           name: coverage-report
           path: coverage/
+
+      - name: Download coverage ZIP
+        uses: actions/download-artifact@v5
+        with:
+          name: coverage-report        
+          path: coverage-zip
+
+      #Check ZIP exists
+      - name: List downloaded files
+        run: ls -R coverage-zip
+
+      - name: Unzip coverage report
+        run: |
+          cd coverage-zip
+          unzip *.zip -d coverage-unzipped
+
+       # Show unzipped coverage files
+      - name: List unzipped coverage contents
+        run: ls -R coverage-zip/coverage-unzipped
