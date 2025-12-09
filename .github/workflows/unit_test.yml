@@ -49,21 +49,31 @@ jobs:
       - name: Run tests
         run: npm test
         
-      - name: Upload coverage report
+      - name: Upload unit test report
         uses: actions/upload-artifact@v5
         with:
-          name: coverage-report
-          path: coverage/
+          name: unit-test-report
+          path: report/report.html
 
-      - name: Download coverage ZIP
+
+      - name: Download unit test report
         uses: actions/download-artifact@v5
         with:
-          name: coverage-report        
-          path: coverage-zip
+          name: unit-test-report
+          path: report-html/
 
-      #Check ZIP exists
+
       - name: List downloaded files
-        run: ls -R coverage-zip
+        run: ls -R report-html
+
+      - name: Send HTML report to Slack
+        run: |
+          curl -F file=@report-html/report.html \
+               -F "initial_comment=📊 *Unit Test Report*" \
+               -F channels=${{ secrets.SLACK_CHANNEL_ID }} \
+               -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
+               https://slack.com/api/files.upload
+
 
 
      
