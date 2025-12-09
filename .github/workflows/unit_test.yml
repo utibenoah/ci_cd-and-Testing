@@ -64,3 +64,13 @@ jobs:
       #Check ZIP exists
       - name: List downloaded files
         run: ls -R coverage-zip
+
+
+      - name: Send Coverage to Slack
+        run: |
+          curl -F file=@coverage-report.zip \
+               -F "initial_comment=📊 *Coverage Report*\n${{ steps.summary.outputs.summary }}" \
+               -F channels=${{ secrets.C0A26FVVAV9 }} \
+               -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
+               https://slack.com/api/files.upload
+
